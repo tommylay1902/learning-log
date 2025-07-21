@@ -16,7 +16,7 @@ const TimeLine: React.FC<TimelineProps> = ({ entries }) => {
     });
   };
   return (
-    <section className="bg-background py-32">
+    <section className="bg-background ">
       <div className="container mx-auto py-2">
         <h1 className="text-foreground mb-10 text-center text-3xl font-bold tracking-tighter sm:text-6xl">
           Tommy Lay&apos;s Learning Log
