@@ -19,6 +19,9 @@ export default async function Home() {
   const { data: log, error: logError } = await supabase.rpc(
     "get_logs_grouped_by_date"
   );
+
+  if (logError) console.log("Error fetching logs:", logError);
+
   const learningLogs = log as unknown as LearningLog[];
   const { data, error } = await supabase.auth.getClaims();
 
