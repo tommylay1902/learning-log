@@ -7,7 +7,10 @@ import { NavigationMenuList } from "@radix-ui/react-navigation-menu";
 
 export default async function Home() {
   const supabase = await createClient();
-  const { data: log } = await supabase.from("log").select();
+  const { data: log } = await supabase
+    .from("log")
+    .select()
+    .order("created_at", { ascending: false });
   const { data, error } = await supabase.auth.getClaims();
 
   return (
