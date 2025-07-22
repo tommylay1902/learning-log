@@ -4,13 +4,22 @@ import { Button } from "@/components/ui/button";
 import { NavigationMenu } from "@/components/ui/navigation-menu";
 import { createClient } from "@/lib/supabase/server";
 import { NavigationMenuList } from "@radix-ui/react-navigation-menu";
-
+interface Entry {
+  content: string;
+  time_spent: number;
+  time: string;
+  title: string;
+}
+export interface LearningLog {
+  display_date: string;
+  entries: Entry[];
+}
 export default async function Home() {
   const supabase = await createClient();
-  const { data: log } = await supabase
-    .from("log")
-    .select()
-    .order("created_at", { ascending: false });
+  const { data: log, error: logError } = await supabase.rpc(
+    "get_logs_grouped_by_date"
+  );
+  const learningLogs = log as unknown as LearningLog[];
   const { data, error } = await supabase.auth.getClaims();
 
   return (
@@ -23,7 +32,7 @@ export default async function Home() {
         </NavigationMenu>
       </div>
       <main className="min-h-screen flex flex-col items-center">
-        <TimeLine entries={log} />
+        <TimeLine entries={learningLogs} />
         {!error && data && <Button>Add Log </Button>}
       </main>
     </>
