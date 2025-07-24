@@ -1,24 +1,22 @@
 import React from "react";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
-import { LearningLog } from "@/app/page";
 import { Accordion, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { AccordionContent } from "@radix-ui/react-accordion";
+import { Database } from "@/database.types";
+import { DateTime } from "luxon";
+import { cookies } from "next/headers";
 
 interface TimelineProps {
-  entries: LearningLog[] | null;
+  entries: Record<string, Database["public"]["Tables"]["log"]["Row"][]> | null;
 }
-const TimeLine: React.FC<TimelineProps> = ({ entries }) => {
-  const totalHours =
-    entries?.reduce((acc, log) => {
-      return (
-        acc + log.entries.reduce((sum, entry) => sum + entry.time_spent, 0)
-      );
-    }, 0) || 0;
+const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
+  const timezone =
+    (await cookies()).get("user-timezone")?.value || "America/Los_Angeles";
   return (
     <section className="bg-background ">
       <div className="container mx-auto py-2">
-        <h1 className="text-foreground mb-2 text-center text-3xl font-bold tracking-tighter sm:text-6xl ">
+        <h1 className="text-foreground mb-4 text-center text-3xl font-bold tracking-tighter sm:text-6xl">
           DO NOT GIVE UP
         </h1>
 
@@ -30,9 +28,7 @@ const TimeLine: React.FC<TimelineProps> = ({ entries }) => {
           </Card>
           <Card>
             <CardContent className="text-center text-2xl font-extrabold p-4">
-              <h1>
-                Total Hours Logged: {((totalHours * 50) / 60).toFixed(2)}{" "}
-              </h1>
+              <h1>Total Hours Logged:</h1>
             </CardContent>
           </Card>
           <Card>
@@ -47,16 +43,16 @@ const TimeLine: React.FC<TimelineProps> = ({ entries }) => {
             className="bg-muted absolute left-2 top-4"
           />
           {entries !== null &&
-            entries.map((entry, index) => (
+            Object.entries(entries).map(([date, logs], index) => (
               <div key={index} className="relative mb-10 pl-8">
                 <div className="bg-foreground absolute left-0 top-3.5 flex size-4 items-center justify-center rounded-full" />
 
-                <div className="flex h-5 items-between space-x-4 text-2xl font-bold">
-                  <div>{entry.display_date}</div>
+                <div className="flex h-5 items-between space-x-4 text-3xl font-bold">
+                  <div>{date}</div>
                 </div>
 
-                {entry.entries.map((log, logIndex) => (
-                  <div key={logIndex} className=" min-w-screen">
+                {logs.map((entry, index) => (
+                  <div key={index} className=" min-w-screen">
                     <Accordion
                       type="single"
                       collapsible
@@ -66,23 +62,27 @@ const TimeLine: React.FC<TimelineProps> = ({ entries }) => {
                       <AccordionItem value="item-2 min-w-screen">
                         <AccordionTrigger>
                           <div className="flex w-full justify-between gap-4 font-bold underline">
-                            <div className="w-40 text-xl">{log.time}</div>
-                            <Separator
-                              orientation="vertical"
-                              className="bg-white h-5"
-                            />
                             <div className="w-40 text-xl">
-                              Time Spent: {log.time_spent}
+                              {DateTime.fromISO(entry.created_at)
+                                .setZone(timezone)
+                                .toLocaleString(DateTime.TIME_SIMPLE)}
                             </div>
                             <Separator
                               orientation="vertical"
                               className="bg-white h-5"
                             />
-                            <div className="w-40 text-xl">{log.title}</div>
+                            <div className="w-40 text-xl">
+                              Time Spent: {entry.time_spent}
+                            </div>
+                            <Separator
+                              orientation="vertical"
+                              className="bg-white h-5"
+                            />
+                            <div className="w-40 text-xl">{entry.title}</div>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="flex flex-col gap-4 text-balance">
-                          <div className="text-lg">{log.content}</div>
+                          <div className="text-lg">{entry.content}</div>
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>

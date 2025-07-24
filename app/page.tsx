@@ -3,26 +3,28 @@ import TimeLine from "@/components/timeline";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu } from "@/components/ui/navigation-menu";
 import { createClient } from "@/lib/supabase/server";
+import { convertAndGroupLogs } from "@/lib/time/convert-and-group-logs";
 import { NavigationMenuList } from "@radix-ui/react-navigation-menu";
-interface Entry {
-  content: string;
-  time_spent: number;
-  time: string;
-  title: string;
-}
-export interface LearningLog {
-  display_date: string;
-  entries: Entry[];
-}
+import { Database } from "@/database.types";
+import { cookies } from "next/headers";
+
 export default async function Home() {
+  const timezone =
+    (await cookies()).get("user-timezone")?.value || "America/Los_Angeles";
+
   const supabase = await createClient();
-  const { data: log, error: logError } = await supabase.rpc(
-    "get_logs_grouped_by_date"
-  );
+  const { data: log, error: logError } = await supabase
+    .from("log")
+    .select()
+    .order("created_at", { ascending: false });
 
   if (logError) console.log("Error fetching logs:", logError);
-
-  const learningLogs = log as unknown as LearningLog[];
+  let convertedLogs: Record<
+    string,
+    Database["public"]["Tables"]["log"]["Row"][]
+  > | null = null;
+  if (log !== null) convertedLogs = convertAndGroupLogs(log, timezone);
+  // const learningLogs = log as unknown as LearningLog[];
   const { data, error } = await supabase.auth.getClaims();
 
   return (
@@ -35,7 +37,7 @@ export default async function Home() {
         </NavigationMenu>
       </div>
       <main className="min-h-screen flex flex-col items-center">
-        <TimeLine entries={learningLogs} />
+        <TimeLine entries={convertedLogs} />
         {!error && data && <Button>Add Log </Button>}
       </main>
     </>
