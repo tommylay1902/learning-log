@@ -6,6 +6,7 @@ import { AccordionContent } from "@radix-ui/react-accordion";
 import { Database } from "@/database.types";
 import { DateTime } from "luxon";
 import { cookies } from "next/headers";
+import { convertPomoToHours } from "@/lib/time/convert";
 
 interface TimelineProps {
   entries: Record<string, Database["public"]["Tables"]["log"]["Row"][]> | null;
@@ -13,6 +14,9 @@ interface TimelineProps {
 const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
   const timezone =
     (await cookies()).get("user-timezone")?.value || "America/Los_Angeles";
+
+  const totalTimeSpent = convertPomoToHours(Object.values(entries!));
+
   return (
     <section className="bg-background ">
       <div className="container mx-auto py-2">
@@ -28,7 +32,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
           </Card>
           <Card>
             <CardContent className="text-center text-2xl font-extrabold p-4">
-              <h1>Total Hours Logged:</h1>
+              <h1>Total Hours Logged: {totalTimeSpent.toFixed(2)}hrs</h1>
             </CardContent>
           </Card>
           <Card>
@@ -63,6 +67,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                         <AccordionTrigger>
                           <div className="flex w-full justify-between gap-4 font-bold underline">
                             <div className="w-40 text-xl">
+                              Session Ended:{" "}
                               {DateTime.fromISO(entry.created_at)
                                 .setZone(timezone)
                                 .toLocaleString(DateTime.TIME_SIMPLE)}
