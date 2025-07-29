@@ -6,7 +6,7 @@ import { convertAndGroupLogs } from "@/lib/time/convert-and-group-logs";
 import { cookies } from "next/headers";
 import React from "react";
 
-export const Page = async () => {
+export default async function Page() {
   const timezone =
     (await cookies()).get("user-timezone")?.value || "America/Los_Angeles";
 
@@ -38,6 +38,4 @@ export const Page = async () => {
       )}
     </>
   );
-};
-
-export default Page;
+}
