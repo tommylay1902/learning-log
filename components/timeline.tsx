@@ -43,16 +43,17 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
         <div className="relative mx-auto w-[90vw]">
           <Separator
             orientation="vertical"
-            className="bg-muted absolute left-2 top-4"
+            className="bg-white absolute left-2 top-4"
           />
           {entries !== null &&
             Object.entries(entries).map(([date, logs], index) => (
               <div key={index} className="relative mb-10 pl-8">
-                <div className="bg-foreground absolute left-0 top-3.5 flex size-4 items-center justify-center rounded-full" />
+                <div className="bg-foreground absolute left-0 top-3.5 flex size-4 items-center justify-center rounded-full " />
 
-                <div className="flex h-5 items-between space-x-4 text-3xl font-bold">
-                  <div>
-                    {date}: <span>{totalDailyTimeSpent[date]}hrs</span>
+                <div className="flex items-between justify-between space-x-4 text-3xl font-bold mr-3 border-b-2 border-white pb-2">
+                  <div className="pt-1">{date}</div>
+                  <div className="pt-1">
+                    <span>Time Studied: {totalDailyTimeSpent[date]}hrs</span>
                   </div>
                 </div>
 
@@ -61,13 +62,13 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                     <Accordion
                       type="single"
                       collapsible
-                      className="min-w-screen"
+                      className="min-w-screen border-b-2"
                       defaultValue="item-1"
                     >
                       <AccordionItem value="item-2 min-w-screen">
                         <AccordionTrigger>
                           <div className="flex w-full justify-between gap-4 font-bold underline">
-                            <div className="w-40 text-xl">
+                            <div className="w-40 text-xl text-center">
                               Session Ended:{" "}
                               {DateTime.fromISO(entry.created_at)
                                 .setZone(timezone)
@@ -87,7 +88,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                             <div className="w-40 text-xl">{entry.title}</div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent className="flex flex-col gap-4 text-balance">
+                        <AccordionContent className="flex flex-col gap-4 text-balance mb-3">
                           <div className="text-lg">{entry.content}</div>
                         </AccordionContent>
                       </AccordionItem>
