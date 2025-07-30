@@ -7,6 +7,7 @@ import { Database } from "@/database.types";
 import { DateTime } from "luxon";
 import { cookies } from "next/headers";
 import { convertPomoToHours, convertTotalHoursDaily } from "@/lib/time/convert";
+import { beautifyYMD } from "@/lib/time/date";
 
 interface TimelineProps {
   entries: Record<string, Database["public"]["Tables"]["log"]["Row"][]> | null;
@@ -18,12 +19,12 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
   const totalDailyTimeSpent = convertTotalHoursDaily(entries);
   return (
     <section className="bg-background ">
-      <div className="container mx-auto py-2">
+      <div className="py-2 ml-3 mx-8">
         <h1 className="text-foreground mb-4 text-center text-3xl font-bold tracking-tighter sm:text-6xl">
           DO NOT GIVE UP
         </h1>
 
-        <div className="flex flex-row items-center justify-center space-x-4 mb-2">
+        <div className="flex flex-row items-center justify-center space-x-4 mb-2 ">
           <Card>
             <CardContent className="text-center text-2xl font-extrabold p-4">
               <h1>Example Stats</h1>
@@ -40,7 +41,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
             </CardContent>
           </Card>
         </div>
-        <div className="relative mx-auto w-[90vw]">
+        <div className="relative w-full">
           <Separator
             orientation="vertical"
             className="bg-white absolute left-2 top-4"
@@ -51,7 +52,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                 <div className="bg-foreground absolute left-0 top-3.5 flex size-4 items-center justify-center rounded-full " />
 
                 <div className="flex items-between justify-between space-x-4 text-3xl font-bold mr-3 border-b-2 border-white pb-2">
-                  <div className="pt-1">{date}</div>
+                  <div className="pt-1">{beautifyYMD(date)}</div>
                   <div className="pt-1">
                     <span>Time Studied: {totalDailyTimeSpent[date]}hrs</span>
                   </div>
@@ -88,8 +89,10 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                             <div className="w-40 text-xl">{entry.title}</div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent className="flex flex-col gap-4 text-balance mb-3">
-                          <div className="text-lg">{entry.content}</div>
+                        <AccordionContent className="flex flex-col gap- mb-3 text-balance">
+                          <div className="text-xl text-center">
+                            {entry.content}
+                          </div>
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>
