@@ -25,7 +25,6 @@ export default async function Page() {
 
   if (log !== null) convertedLogs = convertAndGroupLogs(log, timezone);
 
-  // const learningLogs = log as unknown as LearningLog[];
   const { data, error } = await supabase.auth.getClaims();
 
   return (

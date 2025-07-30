@@ -1,3 +1,5 @@
+import { Database } from "@/database.types";
+
 export const convertPomoToHours = (
   pomos: {
     content: string | null;
@@ -5,7 +7,7 @@ export const convertPomoToHours = (
     id: number;
     time_spent: number | null;
     title: string | null;
-  }[][]
+  }[][],
 ): number => {
   const totalTimeSpent = pomos?.reduce((acc, pomo) => {
     if (pomo) {
@@ -17,4 +19,16 @@ export const convertPomoToHours = (
     return acc;
   }, 0);
   return (totalTimeSpent * 50) / 60;
+};
+
+export const convertTotalHoursDaily = (
+  logs: Record<string, Database["public"]["Tables"]["log"]["Row"][]> | null,
+) => {
+  const dailyLookup: { [key: string]: string } = {};
+  for (const key in logs) {
+    let num = 0;
+    logs[key].forEach((log) => (num += log.time_spent ? log.time_spent : 0));
+    dailyLookup[key] = ((num * 50) / 60).toFixed(2);
+  }
+  return dailyLookup;
 };
