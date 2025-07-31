@@ -10,6 +10,25 @@ export default {
   ],
   theme: {
     extend: {
+      keyframes: {
+        "float-up": {
+          "0%": {
+            transform: "translate(-50%, 100px)", // Starts below (centered)
+            opacity: "0",
+          },
+          "80%": {
+            transform: "translate(-50%, -10px)", // Overshoot (centered)
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translate(-50%, 0)", // Final position (centered)
+            opacity: "1",
+          },
+        },
+      },
+      animation: {
+        "float-up": "float-up .75s ease-out forwards", /// Adjust duration, timing, and repetition
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

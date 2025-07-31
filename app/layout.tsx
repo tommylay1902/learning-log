@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { TimezoneDetector } from "@/components/timezone-setter";
+import Nav from "@/components/nav";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -26,7 +27,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    //
     <html lang="en" suppressHydrationWarning>
       <TimezoneDetector />
       <body className={`${geistSans.className} antialiased`}>
@@ -36,6 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Nav />
           {children}
         </ThemeProvider>
       </body>

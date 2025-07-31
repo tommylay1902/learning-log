@@ -1,15 +1,12 @@
-import { AuthButton } from "@/components/auth-button";
 import TimeLine from "@/components/timeline";
 import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+
 import { Database } from "@/database.types";
 import { createClient } from "@/lib/supabase/client";
 import { createClient as createClientServer } from "@/lib/supabase/server";
 import { convertAndGroupLogs } from "@/lib/time/convert-and-group-logs";
 import { cookies } from "next/headers";
+import { Pencil } from "lucide-react";
 import React from "react";
 
 export default async function Page() {
@@ -36,17 +33,13 @@ export default async function Page() {
 
   return (
     <>
-      <div className="flex justify-end w-full p-4">
-        <NavigationMenu>
-          <NavigationMenuList>
-            <AuthButton />
-          </NavigationMenuList>
-        </NavigationMenu>
-      </div>
       <TimeLine entries={convertedLogs} />
       {!error && data && (
-        <div className="flex justify-center mb-3">
-          <Button>Add Log</Button>
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 animate-float-up">
+          <Button className="shadow-lg">
+            <Pencil />
+            Add Log
+          </Button>
         </div>
       )}
     </>
