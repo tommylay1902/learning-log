@@ -10,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        geist: ["geist", "sans-serif"],
+      },
       keyframes: {
         "float-up": {
           "0%": {

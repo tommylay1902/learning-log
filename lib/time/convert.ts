@@ -22,7 +22,10 @@ export const convertPomoToHours = (
 };
 
 export const convertTotalHoursDaily = (
-  logs: Record<string, Database["public"]["Tables"]["log"]["Row"][]> | null,
+  logs: Record<
+    string,
+    Database["public"]["Tables"]["learning_log"]["Row"][]
+  > | null,
 ) => {
   const dailyLookup: { [key: string]: string } = {};
   for (const key in logs) {

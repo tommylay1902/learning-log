@@ -23,12 +23,21 @@
         --border: 0 0% 89.8%;
         --input: 0 0% 89.8%;
         --ring: 0 0% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
+
         --radius: 0.5rem;
+
+        --color-chrome: #4285f4; /* Google Chrome blue */
+        --color-safari: #000000; /* Safari black */
+        --color-firefox: #ff9500; /* Firefox orange */
+        --color-edge: #0078d7; /* Microsoft Edge blue */
+        --color-other: #888888; /* Gray for other browsers */
+
+        /* Or use your theme colors if you prefer */
+        --chart-1: #4285f4;
+        --chart-2: #000000;
+        --chart-3: #ff9500;
+        --chart-4: #0078d7;
+        --chart-5: #888888;
     }
     .dark {
         --background: 0 0% 3.9%;
@@ -50,11 +59,19 @@
         --border: 0 0% 14.9%;
         --input: 0 0% 14.9%;
         --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
+
+        --color-chrome: #5c9dff; /* Google Chrome blue */
+        --color-safari: #ff6b6b; /* Safari black */
+        --color-firefox: #ffd166; /* Firefox orange */
+        --color-edge: #06d6a0; /* Microsoft Edge blue */
+        --color-other: #9d65c9; /* Gray for other browsers */
+
+        /* Or use your theme colors if you prefer */
+        --chart-1: #5c9dff;
+        --chart-2: #ff6b6b;
+        --chart-3: #ffd166;
+        --chart-4: #06d6a0;
+        --chart-5: #9d65c9;
     }
 }
 

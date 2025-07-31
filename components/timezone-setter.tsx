@@ -1,4 +1,3 @@
-// components/TimezoneDetector.tsx
 "use client";
 
 import { setTimezoneCookie } from "@/app/actions";
