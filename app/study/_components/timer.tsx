@@ -8,18 +8,18 @@ const Timer = () => {
     <>
       {/* {mode === "work" ? <WorkTimer /> : <BreakTimer />} */}
 
-      <Tabs defaultValue="work" className=" justify-center items-center flex-1">
+      <Tabs defaultValue="work" className={"flex-1 "}>
         <TabsContent value="work">
-          <WorkTimer />
+          <WorkTimer initialTime={3000} />
         </TabsContent>
         <TabsContent value="break">
-          <BreakTimer />
+          <BreakTimer initialTime={600} />
         </TabsContent>
-        <TabsList className="fixed mb-4 animate-float-up left-1/2 -translate-x-1/2 bottom-4">
-          <TabsTrigger value="work" className="text-3xl">
+        <TabsList className="fixed mb-4 animate-float-up left-1/2 -translate-x-1/2 bottom-4 justify-center">
+          <TabsTrigger value="work" className="text-6xl">
             Work
           </TabsTrigger>
-          <TabsTrigger value="break" className="text-3xl">
+          <TabsTrigger value="break" className="text-6xl">
             Break
           </TabsTrigger>
         </TabsList>

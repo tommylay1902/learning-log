@@ -1,32 +1,57 @@
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState, useRef } from "react";
 
-// interface WorkTimerProps {
-//   propName: type;
-// }
+interface WorkTimerProps {
+  initialTime: number;
+}
 
-const WorkTimer: React.FC = () => {
-  const [time, setTime] = useState(3000);
+const WorkTimer: React.FC<WorkTimerProps> = ({ initialTime = 2 }) => {
+  const [time, setTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const toggleRunning = () => {
+    setIsRunning((prev) => !prev);
+  };
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout | undefined;
     if (isRunning) {
-      intervalId = setInterval(() => {
-        setTime((prevTime) => prevTime - 1);
+      intervalRef.current = setInterval(() => {
+        setTime((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(intervalRef.current as NodeJS.Timeout);
+            setIsRunning(false);
+            return 0;
+          }
+          return prevTime - 1;
+        });
       }, 1000);
-    } else if (!isRunning && intervalId) {
-      clearInterval(intervalId);
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
 
     return () => {
-      if (intervalId) return clearInterval(intervalId);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, [isRunning]);
 
   useEffect(() => {
+    if (time === 0) {
+      // will make sure it will fire after clearInterval in the event loop
+      const timer = setTimeout(() => {
+        setTime(initialTime);
+        alert("done!");
+      }, 0);
+
+      return () => clearTimeout(timer);
+    }
+  }, [time, initialTime]);
+
+  useEffect(() => {
     const handleKeyUpEvent = (event: KeyboardEvent) => {
       if (event.key === " ") {
-        setIsRunning((isRunning) => !isRunning);
+        toggleRunning();
       }
     };
 
@@ -43,6 +68,15 @@ const WorkTimer: React.FC = () => {
       <div>
         {Math.floor(time / 60).toFixed(0)}:{" "}
         {time % 60 <= 9 ? "0" + (time % 60) : time % 60}
+      </div>
+      <div>
+        <Button
+          className="sm:h-9 md:h-12 rounded-md px-3 w-[20vw] font-bold"
+          onClick={toggleRunning}
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          {isRunning ? "Stop" : "Start"}
+        </Button>
       </div>
     </div>
   );
