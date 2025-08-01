@@ -42,7 +42,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
               <div className="pt-1 flex items-center gap-x-2">
                 Time Studied: {totalDailyTimeSpent[date]}hrs{" "}
                 <Tooltip>
-                  <TooltipTrigger>
+                  <TooltipTrigger asChild>
                     <Info />
                   </TooltipTrigger>
                   <TooltipContent>
@@ -85,7 +85,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                         <div className="w-44 text-xl flex items-center gap-x-2">
                           Time Spent: {entry.time_spent}{" "}
                           <Tooltip>
-                            <TooltipTrigger>
+                            <TooltipTrigger asChild>
                               <Info />
                             </TooltipTrigger>
                             <TooltipContent>

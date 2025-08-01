@@ -51,7 +51,7 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
           <h1 className="flex gap-x-2">
             Total Working Hours Logged: {totalTimeSpent.toFixed(2)}hrs{" "}
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Info size={16} />
               </TooltipTrigger>
               <TooltipContent>
