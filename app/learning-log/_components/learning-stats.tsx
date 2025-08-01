@@ -8,6 +8,12 @@ import {
 } from "@/components/ui/card";
 import { LearningPieChart } from "./learning-piechart";
 import { createClient } from "@/lib/supabase/client";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Info } from "lucide-react";
 
 interface LearningStatsProps {
   totalTimeSpent: number;
@@ -42,7 +48,26 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
           <LearningPieChart data={filteredDate} />
         </CardContent>
         <CardFooter className="flex-col gap-2 text-sm">
-          <h1>Total Hours Logged: {totalTimeSpent.toFixed(2)}hrs</h1>
+          <h1 className="flex gap-x-2">
+            Total Working Hours Logged: {totalTimeSpent.toFixed(2)}hrs{" "}
+            <Tooltip>
+              <TooltipTrigger>
+                <Info size={16} />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-md">
+                  Time calculated from{" "}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
+                    className="text-blue-600 "
+                  >
+                    Pomodoro
+                  </a>{" "}
+                  work sessions only (breaks excluded).
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </h1>
         </CardFooter>
       </Card>
     </div>

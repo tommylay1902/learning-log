@@ -13,7 +13,7 @@ export const convertAndGroupLogs = (
     const dateKey = DateTime.fromISO(log.created_at)
       .setZone(timezone)
       .toString()
-      .split("T")[0]; // Group by date
+      .split("T")[0];
 
     if (!groupedLogs[dateKey]) {
       groupedLogs[dateKey] = [];

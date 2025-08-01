@@ -8,6 +8,12 @@ import { DateTime } from "luxon";
 import { cookies } from "next/headers";
 import { convertTotalHoursDaily } from "@/lib/time/convert";
 import { beautifyYMD } from "@/lib/time/date";
+import { Info } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface TimelineProps {
   entries: Record<
@@ -33,8 +39,25 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
 
             <div className="flex items-between justify-between space-x-4 text-3xl font-bold mr-3 border-b-2 border-white pb-2">
               <div className="pt-1">{beautifyYMD(date)}</div>
-              <div className="pt-1">
-                <span>Time Studied: {totalDailyTimeSpent[date]}hrs</span>
+              <div className="pt-1 flex items-center gap-x-2">
+                Time Studied: {totalDailyTimeSpent[date]}hrs{" "}
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Info />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="text-md">
+                      Time calculated from{" "}
+                      <a
+                        href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
+                        className="text-blue-600 "
+                      >
+                        Pomodoro
+                      </a>{" "}
+                      work sessions only (breaks excluded).
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
 
@@ -59,8 +82,25 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                           orientation="vertical"
                           className="bg-white h-5"
                         />
-                        <div className="w-40 text-xl">
-                          Time Spent: {entry.time_spent}
+                        <div className="w-44 text-xl flex items-center gap-x-2">
+                          Time Spent: {entry.time_spent}{" "}
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Info />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="text-md">
+                                Represents how many{" "}
+                                <a
+                                  href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
+                                  className="text-blue-600 "
+                                >
+                                  pomodoro sessions
+                                </a>{" "}
+                                were spent (current split is 50/10)
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                         <Separator
                           orientation="vertical"

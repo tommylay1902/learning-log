@@ -1,10 +1,8 @@
-"use client";
-import { useEffect } from "react";
 import Timer from "./timer";
 
 const Pomodoro = () => {
   return (
-    <div>
+    <div className="flex flex-1">
       <Timer />
     </div>
   );
