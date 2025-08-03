@@ -13,7 +13,7 @@ const RainContainer: React.FC<RainContainerProps> = ({ start }) => {
 
   useEffect(() => {
     if (start) {
-      const numDrops = 200;
+      const numDrops = 50;
       setDrops(
         Array.from({ length: numDrops }, (_, i) => ({
           id: i,

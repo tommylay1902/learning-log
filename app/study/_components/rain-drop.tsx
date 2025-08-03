@@ -32,7 +32,7 @@ const RainDrop: React.FC<RainDropProps> = ({ initialX, delay, start }) => {
         left: initialX,
         width: "2px",
         height: "10px",
-        backgroundColor: "rgba(173, 216, 230, 0.8)", // Light blue for rain
+        backgroundColor: "rgba(200, 200, 200, 0.8)",
       }}
     />
   );

@@ -31,10 +31,12 @@ const Pomodoro = () => {
   };
 
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-1 overflow-x-hidden">
       <Timer onTimerChange={handleTimerChange} />
       <RainContainer start={isWorking && isActive} />
-      <div className="fixed bottom-14 left-14">
+      <div
+        className={isWorking ? "fixed bottom-14 left-14 " : "invisible w-0 h-0"}
+      >
         <AudioPlayer ref={audioRef} isMuted={isMuted} />
         <VolumeControl isMuted={isMuted} handleMuteChange={handleMuteChange} />
       </div>
