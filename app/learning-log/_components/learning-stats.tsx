@@ -14,6 +14,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
+import Image from "next/image";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 interface LearningStatsProps {
   totalTimeSpent: number;
@@ -43,30 +45,48 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
       <div className="min-w-[30vw] text-center">
         <h1 className="font-bold text-2xl inline-flex items-baseline justify-center gap-x-2">
           Current Projects I&apos;m working on
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Info size={24} />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-md">
-                Clicking on any link will direct you to the github source code
-              </p>
-            </TooltipContent>
-          </Tooltip>
         </h1>
-        <ul className="text-2xl text-blue underline">
-          <li className="inline-flex items-center gap-1">
-            <a href="https://github.com/tommylay1902/BPS" target="_blank">
-              <span className="underline">BPS</span>
-            </a>
+        <ul className="text-2xl text-blue">
+          <li className="inline-flex items-center justify-center gap-1">
+            <span>Budget Per Serving</span>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href="https://github.com/tommylay1902/BPS" target="_blank">
+                  <Image
+                    alt="githubLogo"
+                    src="svg/github.svg"
+                    width="20"
+                    height="20"
+                    className=" invert inline-flex pb-1 ml-2 hover:scale-125"
+                  />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-md">Click this to see the github repo!</p>
+              </TooltipContent>
+            </Tooltip>
           </li>
           <li>
-            <a
-              href="https://github.com/tommylay1902/learning-log"
-              target="_blank"
-            >
-              This website!
-            </a>
+            <span>This website!</span>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a
+                  href="https://github.com/tommylay1902/learning-log"
+                  target="_blank"
+                >
+                  <Image
+                    alt="githubLogo"
+                    src="svg/github.svg"
+                    width="20"
+                    height="20"
+                    className=" invert inline-flex pb-1 ml-2 hover:scale-125"
+                  />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-md">Click this to see the github repo!</p>
+              </TooltipContent>
+            </Tooltip>
           </li>
         </ul>
       </div>
@@ -103,33 +123,43 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
       <div className="min-w-[30vw] text-center">
         <h1 className="font-bold text-2xl inline-flex items-baseline justify-center gap-x-2">
           Current reading resources
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Info size={24} />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-md">
-                Clicking any link will lead you to an amazon link
-              </p>
-            </TooltipContent>
-          </Tooltip>
         </h1>
-        <ul className="text-2xl text-blue underline">
-          <li className="inline-flex items-center gap-1">
-            <a
-              href="https://www.amazon.com/Dependency-Injection-NET-Mark-Seemann/dp/1935182501"
-              target="_blank"
-            >
-              <span className="underline">DI in .Net</span>
-            </a>
-          </li>
+        <ul className="text-2xl text-blue">
           <li>
-            <a
-              href="https://www.amazon.com/Pro-NET-Foundational-Principles-Programming/dp/1484278682"
-              target="_blank"
-            >
-              Pro C#
-            </a>
+            <div className="inline-flex justify-center items-center ">
+              <span>DI in .Net</span>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a
+                    href="https://www.amazon.com/Dependency-Injection-NET-Mark-Seemann/dp/1935182501"
+                    target="_blank"
+                  >
+                    <SquareArrowOutUpRight size={18} className={"ml-2"} />
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-md">View the book on amazon</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </li>
+          <li className="items-center">
+            <div className="inline-flex justify-center items-center ">
+              <span>Pro C#</span>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a
+                    href="https://www.amazon.com/Pro-NET-Foundational-Principles-Programming/dp/1484278682"
+                    target="_blank"
+                  >
+                    <SquareArrowOutUpRight size={18} className={"ml-2"} />
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-md">View the book on amazon</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
           </li>
         </ul>
       </div>
