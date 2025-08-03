@@ -3,15 +3,26 @@ import { useEffect, useState, useRef } from "react";
 
 interface WorkTimerProps {
   initialTime: number;
+  onActiveChange: (active: boolean) => void;
+  // onComplete: () => void;
 }
 
-const WorkTimer: React.FC<WorkTimerProps> = ({ initialTime = 2 }) => {
+const WorkTimer: React.FC<WorkTimerProps> = ({
+  initialTime = 2,
+  onActiveChange,
+  // onComplete,
+}) => {
   const [time, setTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const toggleRunning = () => {
     setIsRunning((prev) => !prev);
   };
+
+  useEffect(() => {
+    onActiveChange(isActive);
+  }, [isActive, onActiveChange]);
 
   useEffect(() => {
     if (isRunning) {
@@ -20,6 +31,8 @@ const WorkTimer: React.FC<WorkTimerProps> = ({ initialTime = 2 }) => {
           if (prevTime <= 1) {
             clearInterval(intervalRef.current as NodeJS.Timeout);
             setIsRunning(false);
+            setIsActive(false);
+            // onComplete();
             return 0;
           }
           return prevTime - 1;
@@ -34,11 +47,10 @@ const WorkTimer: React.FC<WorkTimerProps> = ({ initialTime = 2 }) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning]);
+  }, [isRunning, time]);
 
   useEffect(() => {
     if (time === 0) {
-      // will make sure it will fire after clearInterval in the event loop
       const timer = setTimeout(() => {
         setTime(initialTime);
         alert("done!");
@@ -52,6 +64,7 @@ const WorkTimer: React.FC<WorkTimerProps> = ({ initialTime = 2 }) => {
     const handleKeyUpEvent = (event: KeyboardEvent) => {
       if (event.key === " ") {
         toggleRunning();
+        setIsActive((prev) => !prev);
       }
     };
 
@@ -61,6 +74,11 @@ const WorkTimer: React.FC<WorkTimerProps> = ({ initialTime = 2 }) => {
       window.removeEventListener("keyup", handleKeyUpEvent);
     };
   }, []);
+
+  const toggleTimer = () => {
+    setIsActive(!isActive);
+    setIsRunning((prev) => !prev);
+  };
 
   return (
     <div className="text-center text-8xl font-bold flex flex-col items-center justify-center justify-items-center gap-y-3 h-full pb-32">
@@ -72,10 +90,10 @@ const WorkTimer: React.FC<WorkTimerProps> = ({ initialTime = 2 }) => {
       <div>
         <Button
           className="sm:h-9 md:h-12 rounded-md px-3 w-[20vw] font-bold"
-          onClick={toggleRunning}
+          onClick={toggleTimer}
           onMouseDown={(e) => e.preventDefault()}
         >
-          {isRunning ? "Stop" : "Start"}
+          {isActive ? "Pause" : "Start"}
         </Button>
       </div>
     </div>

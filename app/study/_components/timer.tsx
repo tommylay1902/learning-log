@@ -2,15 +2,29 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BreakTimer from "./break-timer";
 import WorkTimer from "./work-timer";
+import { useState, useEffect } from "react";
 
-const Timer = () => {
+interface TimerProps {
+  onTimerChange: (isWorking: boolean, isActive: boolean) => void;
+}
+const Timer: React.FC<TimerProps> = ({ onTimerChange }) => {
+  const [activeTab, setActiveTab] = useState<"work" | "break">("work");
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    onTimerChange(activeTab === "work", isActive);
+  }, [activeTab, isActive, onTimerChange]);
+
   return (
     <>
-      {/* {mode === "work" ? <WorkTimer /> : <BreakTimer />} */}
-
-      <Tabs defaultValue="work" className={"flex-1 "}>
+      <Tabs
+        defaultValue="work"
+        value={activeTab}
+        className={"flex-1 "}
+        onValueChange={(value) => setActiveTab(value as "work" | "break")}
+      >
         <TabsContent value="work">
-          <WorkTimer initialTime={3000} />
+          <WorkTimer initialTime={3000} onActiveChange={setIsActive} />
         </TabsContent>
         <TabsContent value="break">
           <BreakTimer initialTime={600} />
