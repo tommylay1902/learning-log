@@ -31,6 +31,7 @@ const LearningStreaks: React.FC<LearningStreaksProps> = ({
     const lastDayInLastWeek = daysThisMonth % 7 || 7;
     return (lastWeekIndex * 7 + lastDayInLastWeek) * 0.003;
   }, [daysThisMonth]);
+
   useEffect(() => {
     const calculateWeeks = () => {
       const newWeeks: number[][] = [];

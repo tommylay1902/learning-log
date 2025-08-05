@@ -42,7 +42,7 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
   const filteredDate = data?.filter((d) => d.time_spent[0].sum > 0) ?? [];
   return (
     <div className="flex flex-row items-center justify-center space-x-4 mb-2 min-w-screen">
-      <div className="min-w-[30vw] text-center">
+      <div className="min-w-[30vw] text-center animate-fade-in-right delay-700 opacity-0">
         <h1 className="font-bold text-2xl inline-flex items-baseline justify-center gap-x-2">
           Current Projects I&apos;m working on
         </h1>
@@ -91,13 +91,13 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
         </ul>
       </div>
       <Card className="flex flex-col">
-        <CardHeader className="items-center pb-0 text-center">
+        <CardHeader className="items-center pb-0 text-center animate-float-up delay-700 opacity-0">
           <CardTitle>Pie Chart - Study Allocation Breakdown</CardTitle>
         </CardHeader>
         <CardContent className="flex-1 pb-0">
           <LearningPieChart data={filteredDate} />
         </CardContent>
-        <CardFooter className="flex-col gap-2 text-sm">
+        <CardFooter className="flex-col gap-2 text-sm animate-float-up opacity-0 delay-700">
           <h1 className="flex gap-x-2">
             Total Working Hours Logged: {totalTimeSpent.toFixed(2)}hrs{" "}
             <Tooltip>
@@ -120,7 +120,7 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
           </h1>
         </CardFooter>
       </Card>
-      <div className="min-w-[30vw] text-center">
+      <div className="min-w-[30vw] text-center animate-fade-in delay-700 opacity-0">
         <h1 className="font-bold text-2xl inline-flex items-baseline justify-center gap-x-2">
           Current reading resources
         </h1>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
 import { Accordion, AccordionItem, AccordionTrigger } from "./ui/accordion";
@@ -27,7 +26,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
 
   const totalDailyTimeSpent = convertTotalHoursDaily(entries);
   return (
-    <div className="relative w-full">
+    <div className="relative w-full animate-float-up opacity-0 delay-1000">
       <Separator
         orientation="vertical"
         className="bg-white absolute left-2 top-4"
@@ -40,7 +39,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
             <div className="flex items-between justify-between space-x-4 text-3xl font-bold mr-3 border-b-2 border-white pb-2">
               <div className="pt-1">{beautifyYMD(date)}</div>
               <div className="pt-1 flex items-center gap-x-2">
-                Time Studied: {totalDailyTimeSpent[date]}hrs{" "}
+                Time Studied: {totalDailyTimeSpent[date]}{" "}
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Info />

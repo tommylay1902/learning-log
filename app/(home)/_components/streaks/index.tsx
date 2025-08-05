@@ -34,7 +34,7 @@ const Streaks = async () => {
   const daysThisMonth = daysInThisMonth();
 
   return (
-    <div className="overflow-hidden w-full">
+    <div>
       <LearningStreaks dailyHours={dailyHours} daysThisMonth={daysThisMonth} />
     </div>
   );
