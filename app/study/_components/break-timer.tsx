@@ -38,7 +38,6 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ initialTime }) => {
 
   useEffect(() => {
     if (time === 0) {
-      // will make sure it will fire after clearInterval in the event loop
       const timer = setTimeout(() => {
         setTime(initialTime);
         alert("done!");
