@@ -74,13 +74,13 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
     >
       <TabsContent value="work">
         <WorkTimer
-          initialTime={3}
+          initialTime={3000}
           onActiveChange={setIsActive}
           onComplete={handleOnComplete}
         />
       </TabsContent>
       <TabsContent value="break">
-        <BreakTimer initialTime={3} onComplete={handleOnComplete} />
+        <BreakTimer initialTime={600} onComplete={handleOnComplete} />
       </TabsContent>
       <TabsContent value="reflect">
         <div>hello</div>
