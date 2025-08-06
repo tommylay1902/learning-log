@@ -14,6 +14,18 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
   );
   const [isActive, setIsActive] = useState(false);
 
+  const handleOnComplete = () => {
+    switch (activeTab) {
+      case "work":
+        setActiveTab("break");
+        break;
+      case "break":
+        setActiveTab("work");
+        break;
+      default:
+        setActiveTab("break");
+    }
+  };
   const handleTabChange = (newTab: "work" | "break" | "reflect") => {
     if (newTab === "work") {
       setActiveTab("work");
@@ -44,16 +56,26 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
       activationMode="manual"
     >
       <TabsContent value="work">
-        <WorkTimer initialTime={3000} onActiveChange={setIsActive} />
+        <WorkTimer
+          initialTime={3}
+          onActiveChange={setIsActive}
+          onComplete={handleOnComplete}
+        />
       </TabsContent>
       <TabsContent value="break">
-        <BreakTimer initialTime={600} />
+        <BreakTimer initialTime={3} onComplete={handleOnComplete} />
       </TabsContent>
       <TabsContent value="reflect">
         <div>hello</div>
       </TabsContent>
 
-      <TabsList className="bottom-4 mb-4 flex animate-float-up items-center justify-center w-screen">
+      <TabsList
+        className={`bottom-4 mb-4 flex animate-float-up items-center justify-center w-screen transition-all duration-1000 ${isActive ? "border-b-black" : "border-b-white"}`}
+        onFocus={(e) => {
+          e.preventDefault();
+          e.target.blur();
+        }}
+      >
         <TabsTrigger value="work" className="text-6xl">
           Work
         </TabsTrigger>

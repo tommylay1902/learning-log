@@ -3,9 +3,10 @@ import { useEffect, useState, useRef } from "react";
 
 interface BreakTimerProps {
   initialTime: number;
+  onComplete: () => void;
 }
 
-const BreakTimer: React.FC<BreakTimerProps> = ({ initialTime }) => {
+const BreakTimer: React.FC<BreakTimerProps> = ({ initialTime, onComplete }) => {
   const [time, setTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -34,7 +35,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ initialTime }) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning]);
+  }, [isRunning, onComplete]);
 
   useEffect(() => {
     if (time === 0) {
@@ -42,11 +43,12 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ initialTime }) => {
       const timer = setTimeout(() => {
         setTime(initialTime);
         alert("done!");
+        onComplete();
       }, 0);
 
       return () => clearTimeout(timer);
     }
-  }, [time, initialTime]);
+  }, [time, initialTime, onComplete]);
 
   useEffect(() => {
     const handleKeyUpEvent = (event: KeyboardEvent) => {

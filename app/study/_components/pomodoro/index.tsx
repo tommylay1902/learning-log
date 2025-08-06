@@ -51,7 +51,7 @@ const Pomodoro = () => {
       />
       <div className="flex flex-col items-center">
         <TimerManager onTimerChange={handleTimerChange} />
-        <ToggleWarningsSwitch />
+        <ToggleWarningsSwitch visible={!isActive} />
       </div>
 
       <RainContainer start={isWorking && isActive} />

@@ -4,13 +4,13 @@ import { useEffect, useState, useRef } from "react";
 interface WorkTimerProps {
   initialTime: number;
   onActiveChange: (active: boolean) => void;
-  // onComplete: () => void;
+  onComplete: () => void;
 }
 
 const WorkTimer: React.FC<WorkTimerProps> = ({
   initialTime = 2,
   onActiveChange,
-  // onComplete,
+  onComplete,
 }) => {
   const [time, setTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
@@ -38,7 +38,7 @@ const WorkTimer: React.FC<WorkTimerProps> = ({
             clearInterval(intervalRef.current as NodeJS.Timeout);
             setIsRunning(false);
             setIsActive(false);
-            // onComplete();
+
             return 0;
           }
           return prevTime - 1;
@@ -53,18 +53,19 @@ const WorkTimer: React.FC<WorkTimerProps> = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning, time]);
+  }, [isRunning, time, onComplete]);
 
   useEffect(() => {
     if (time === 0) {
       const timer = setTimeout(() => {
         setTime(initialTime);
         alert("done!");
+        onComplete();
       }, 0);
 
       return () => clearTimeout(timer);
     }
-  }, [time, initialTime]);
+  }, [time, initialTime, onComplete]);
 
   useEffect(() => {
     const handleKeyUpEvent = (event: KeyboardEvent) => {
