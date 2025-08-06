@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import RainContainer from "../raindrops";
 import TimerManager from "./timer-manager";
 
@@ -10,6 +10,17 @@ const Pomodoro = () => {
   const [isActive, setIsActive] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isWorking && isActive) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [isWorking, isActive]);
 
   const handleTimerChange = (isWorking: boolean, isActive: boolean) => {
     setIsWorking(isWorking);

@@ -4,6 +4,8 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { TimezoneDetector } from "@/components/timezone-setter";
 import Nav from "@/components/nav";
+import { Suspense } from "react";
+import { NavigationEvents } from "@/components/navigation-events";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -41,6 +43,10 @@ export default function RootLayout({
             <div className="flex-1">{children}</div>
           </ThemeProvider>
         </div>
+
+        <Suspense>
+          <NavigationEvents />
+        </Suspense>
       </body>
     </html>
   );
