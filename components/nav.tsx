@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function Nav() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-[#222222] backdrop-blur supports-[backdrop-filter]:bg-background/60 pt-2">
+    <header className="sticky top-0 z-50 w-full  bg-black/60 backdrop-blur supports-[backdrop-filter]:bg-background/60 pt-2">
       <div className="m-3">
         <NavigationMenu className="w-full max-w-none pb-2">
           <NavigationMenuList className="flex w-full  items-center">

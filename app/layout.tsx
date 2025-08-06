@@ -31,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <TimezoneDetector />
-      <body className={`${geistSans.className} antialiased`}>
+      <body
+        className={`${geistSans.className} antialiased bg-gradient-to-t from-neutral-900 via-slate-700 to-slate-900`}
+      >
         <div className="flex flex-col min-h-screen">
           <ThemeProvider
             attribute="class"

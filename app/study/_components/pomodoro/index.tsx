@@ -44,13 +44,19 @@ const Pomodoro = () => {
 
   return (
     <div className="flex flex-1 overflow-x-hidden">
-      <div className="flex flex-col items-center justify-center flex-1">
+      {/*need to fix my layout this seems so hacky*/}
+      <div
+        className={`fixed inset-0 -z-10 tranisition-all duration-1000
+          ${isWorking && isActive ? "bg-black" : "bg-transparent"}`}
+      />
+      <div className="flex flex-col items-center">
         <TimerManager onTimerChange={handleTimerChange} />
         <ToggleWarningsSwitch />
       </div>
+
       <RainContainer start={isWorking && isActive} />
       <div
-        className={isWorking ? "fixed bottom-14 left-14 " : "invisible w-0 h-0"}
+        className={isWorking ? "fixed bottom-14 left-14" : "invisible w-0 h-0"}
       >
         <Audio
           ref={audioRef}

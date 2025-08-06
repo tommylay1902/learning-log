@@ -10,10 +10,10 @@ interface AudioProps {
 const Audio = forwardRef<HTMLAudioElement, AudioProps>(
   ({ isMuted, handleMuteChange }, ref) => {
     return (
-      <>
+      <div className={`flex items-center gap-4 `}>
         <AudioPlayer ref={ref} isMuted={isMuted} />
         <VolumeControl isMuted={isMuted} handleMuteChange={handleMuteChange} />
-      </>
+      </div>
     );
   },
 );

@@ -1,4 +1,3 @@
-import { Card, CardContent } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
 
 import { AccordionContent } from "@radix-ui/react-accordion";
@@ -67,7 +66,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
             </div>
 
             {logs.map((entry, index) => (
-              <div key={index} className=" min-w-screen">
+              <div key={index} className=" min-w-screen bg-inherit">
                 <Accordion
                   type="single"
                   collapsible
@@ -121,12 +120,6 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
                 </Accordion>
               </div>
             ))}
-
-            <Card className="my-5 border-none shadow-none">
-              <CardContent className="px-0 xl:px-2">
-                <div className="flex items-center space-x-5 pt-2 flex-shrink-0"></div>
-              </CardContent>
-            </Card>
           </div>
         ))}
     </div>
