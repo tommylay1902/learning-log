@@ -40,9 +40,9 @@ export default async function Page() {
 
   return (
     <>
-      <section className="bg-background flex-1">
+      <section className="flex-1">
         <div className="py-2 ml-3 mx-8">
-          <h1 className="text-foreground mb-4 text-center text-5xl font-bold tracking-tighter animate-float-up delay-1000 opacity-0">
+          <h1 className="mb-4 text-center text-5xl font-bold tracking-tighter animate-float-up delay-1000 opacity-0">
             Learning Log
           </h1>
 

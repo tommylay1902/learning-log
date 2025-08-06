@@ -1,15 +1,27 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import RainContainer from "../raindrops";
 import TimerManager from "./timer-manager";
 
 import Audio from "../audio";
+import ToggleWarningsSwitch from "./toggle-warnings-switch";
 
 const Pomodoro = () => {
   const [isWorking, setIsWorking] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isWorking && isActive) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [isWorking, isActive]);
 
   const handleTimerChange = (isWorking: boolean, isActive: boolean) => {
     setIsWorking(isWorking);
@@ -32,10 +44,19 @@ const Pomodoro = () => {
 
   return (
     <div className="flex flex-1 overflow-x-hidden">
-      <TimerManager onTimerChange={handleTimerChange} />
+      {/*need to fix my layout this seems so hacky*/}
+      <div
+        className={`fixed inset-0 -z-10 tranisition-all duration-1000
+          ${isWorking && isActive ? "bg-black" : "bg-transparent"}`}
+      />
+      <div className="flex flex-col items-center">
+        <TimerManager onTimerChange={handleTimerChange} />
+        <ToggleWarningsSwitch visible={!isActive} />
+      </div>
+
       <RainContainer start={isWorking && isActive} />
       <div
-        className={isWorking ? "fixed bottom-14 left-14 " : "invisible w-0 h-0"}
+        className={isWorking ? "fixed bottom-14 left-14" : "invisible w-0 h-0"}
       >
         <Audio
           ref={audioRef}

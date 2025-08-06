@@ -31,8 +31,9 @@ export const convertTotalHoursDaily = (
   for (const key in logs) {
     let num = 0;
     logs[key].forEach((log) => (num += log.time_spent ? log.time_spent : 0));
-    const integerPart = Math.trunc(num); // Gets the integer part (e.g., 123)
-    const decimalPart = num - integerPart; // Gets the decimal part (e.g., 0.456)
+    const convertToHours = (num * 50) / 60;
+    const integerPart = Math.trunc(convertToHours);
+    const decimalPart = convertToHours - integerPart;
 
     dailyLookup[key] =
       `${integerPart} Hour(s), ${(decimalPart * 60).toFixed(0)} Min(s)`;
