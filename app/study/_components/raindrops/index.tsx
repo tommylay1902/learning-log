@@ -35,7 +35,7 @@ const RainContainer: React.FC<RainContainerProps> = ({ start }) => {
         top: 0,
         left: 0,
         width: "100vw",
-        height: "100vh",
+        height: "75vh",
         overflow: "hidden",
         pointerEvents: "none",
         zIndex: 0,

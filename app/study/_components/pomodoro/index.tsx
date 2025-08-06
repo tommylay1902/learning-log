@@ -4,6 +4,7 @@ import RainContainer from "../raindrops";
 import TimerManager from "./timer-manager";
 
 import Audio from "../audio";
+import ToggleWarningsSwitch from "./toggle-warnings-switch";
 
 const Pomodoro = () => {
   const [isWorking, setIsWorking] = useState(true);
@@ -43,7 +44,10 @@ const Pomodoro = () => {
 
   return (
     <div className="flex flex-1 overflow-x-hidden">
-      <TimerManager onTimerChange={handleTimerChange} />
+      <div className="flex flex-col items-center justify-center flex-1">
+        <TimerManager onTimerChange={handleTimerChange} />
+        <ToggleWarningsSwitch />
+      </div>
       <RainContainer start={isWorking && isActive} />
       <div
         className={isWorking ? "fixed bottom-14 left-14 " : "invisible w-0 h-0"}

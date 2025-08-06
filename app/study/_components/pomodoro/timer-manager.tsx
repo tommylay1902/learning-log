@@ -20,7 +20,7 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
       return;
     }
 
-    if (isActive) {
+    if (isActive && activeTab === "work") {
       const confirmed = confirm(
         "Are you sure you want to switch out of work mode? Time will be reset",
       );
@@ -41,7 +41,6 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
     <Tabs
       value={activeTab}
       onValueChange={(value) => handleTabChange(value as typeof activeTab)}
-      className="flex-1"
       activationMode="manual"
     >
       <TabsContent value="work">
@@ -54,7 +53,7 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
         <div>hello</div>
       </TabsContent>
 
-      <TabsList className="fixed bottom-4 mb-4 flex animate-float-up items-center justify-center">
+      <TabsList className="bottom-4 mb-4 flex animate-float-up items-center justify-center w-screen">
         <TabsTrigger value="work" className="text-6xl">
           Work
         </TabsTrigger>

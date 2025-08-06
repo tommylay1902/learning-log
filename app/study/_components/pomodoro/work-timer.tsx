@@ -21,14 +21,6 @@ const WorkTimer: React.FC<WorkTimerProps> = ({
     setIsRunning((prev) => !prev);
   };
 
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", (e) => {
-  //     e.preventDefault();
-  //     alert("dont close out yet!");
-  //   });
-  //   return () => window.removeEventListener("beforeunload", () => {});
-  // }, []);
-
   useEffect(() => {
     if (isActive) {
     }
