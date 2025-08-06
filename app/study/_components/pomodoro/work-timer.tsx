@@ -16,9 +16,23 @@ const WorkTimer: React.FC<WorkTimerProps> = ({
   const [isRunning, setIsRunning] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
   const toggleRunning = () => {
     setIsRunning((prev) => !prev);
   };
+
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", (e) => {
+  //     e.preventDefault();
+  //     alert("dont close out yet!");
+  //   });
+  //   return () => window.removeEventListener("beforeunload", () => {});
+  // }, []);
+
+  useEffect(() => {
+    if (isActive) {
+    }
+  }, [isActive]);
 
   useEffect(() => {
     onActiveChange(isActive);

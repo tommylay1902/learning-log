@@ -90,7 +90,7 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
           </li>
         </ul>
       </div>
-      <Card className="flex flex-col">
+      <Card className="flex flex-col border-0">
         <CardHeader className="items-center pb-0 text-center animate-float-up delay-700 opacity-0">
           <CardTitle>Pie Chart - Study Allocation Breakdown</CardTitle>
         </CardHeader>
