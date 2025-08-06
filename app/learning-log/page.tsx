@@ -1,6 +1,5 @@
-import TimeLine from "@/components/timeline";
 import { Button } from "@/components/ui/button";
-
+import TimeLine from "./_components/timeline";
 import { Database } from "@/database.types";
 import { createClient } from "@/lib/supabase/client";
 import { createClient as createClientServer } from "@/lib/supabase/server";
@@ -43,7 +42,7 @@ export default async function Page() {
     <>
       <section className="bg-background flex-1">
         <div className="py-2 ml-3 mx-8">
-          <h1 className="text-foreground mb-4 text-center text-5xl font-bold tracking-tighter ">
+          <h1 className="text-foreground mb-4 text-center text-5xl font-bold tracking-tighter animate-float-up delay-1000 opacity-0">
             Learning Log
           </h1>
 

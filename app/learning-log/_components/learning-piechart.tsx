@@ -66,7 +66,13 @@ export function LearningPieChart({ data }: LearningPieChartProps) {
         <ChartTooltip
           content={<ChartTooltipContent nameKey="hours" hideLabel />}
         />
-        <Pie data={chartData} dataKey="hours" nameKey="hours">
+        <Pie
+          data={chartData}
+          dataKey="hours"
+          nameKey="hours"
+          animationDuration={700}
+          animationBegin={0}
+        >
           <LabelList
             dataKey="category"
             className="font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"

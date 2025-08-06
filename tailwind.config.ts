@@ -14,23 +14,72 @@ export default {
         geist: ["geist", "sans-serif"],
       },
       keyframes: {
+        "fade-in": {
+          "0%": {
+            opacity: "0",
+            transform: "translate(8px)",
+          },
+          "80%": {
+            opacity: ".8",
+            transform: "translate(-2px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(0)",
+          },
+        },
+        "fade-in-right": {
+          "0%": {
+            opacity: "0",
+            transform: "translate(-8px)",
+          },
+          "80%": {
+            opacity: ".8",
+            transform: "translate(-2px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(0)",
+          },
+        },
         "float-up": {
           "0%": {
-            transform: "translate(-50%, 100px)", // Starts below (centered)
+            transform: "translate(0, 100px)", // Starts below (centered)
             opacity: "0",
           },
           "80%": {
-            transform: "translate(-50%, -10px)", // Overshoot (centered)
+            transform: "translate(0, -10px)", // Overshoot (centered)
             opacity: "1",
           },
           "100%": {
-            transform: "translate(-50%, 0)", // Final position (centered)
+            transform: "translate(0, 0)", // Final position (centered)
+            opacity: "1",
+          },
+        },
+        "float-up-cell": {
+          "0%": {
+            transform: "translateY(10px)",
+            opacity: "0",
+          },
+          "80%": {
+            transform: "translateY(-2px)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(0)",
             opacity: "1",
           },
         },
       },
       animation: {
-        "float-up": "float-up .75s ease-out forwards", /// Adjust duration, timing, and repetition
+        "float-up": "float-up .75s ease-out forwards",
+        "float-up-cell": "float-up-cell 0.2s ease-out forwards",
+        "fade-in": "fade-in .5s ease-out forwards",
+        "fade-in-right": "fade-in-right .5s ease-out forwards",
+      },
+      animationDelay: {
+        "700": "700ms",
+        "1200": "1200ms",
       },
       colors: {
         background: "hsl(var(--background))",

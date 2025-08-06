@@ -4,10 +4,10 @@ import BreakTimer from "./break-timer";
 import WorkTimer from "./work-timer";
 import { useState, useEffect } from "react";
 
-interface TimerProps {
+interface TimerManagerProps {
   onTimerChange: (isWorking: boolean, isActive: boolean) => void;
 }
-const Timer: React.FC<TimerProps> = ({ onTimerChange }) => {
+const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
   const [activeTab, setActiveTab] = useState<"work" | "break" | "reflect">(
     "work",
   );
@@ -36,7 +36,7 @@ const Timer: React.FC<TimerProps> = ({ onTimerChange }) => {
         <TabsContent value="reflect">
           <div>hello</div>
         </TabsContent>
-        <TabsList className="fixed mb-4 animate-float-up left-1/2 -translate-x-1/2 bottom-4 justify-center">
+        <TabsList className="fixed mb-4 animate-float-up bottom-4 justify-center items-center flex">
           <TabsTrigger value="work" className="text-6xl">
             Work
           </TabsTrigger>
@@ -52,4 +52,4 @@ const Timer: React.FC<TimerProps> = ({ onTimerChange }) => {
   );
 };
 
-export default Timer;
+export default TimerManager;

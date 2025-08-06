@@ -15,7 +15,7 @@ const AudioPlayer = forwardRef<HTMLAudioElement, AudioPlayerProps>(
     return (
       <div className="invisible w-0 h-0">
         <audio ref={ref} controls loop muted={isMuted}>
-          <source src="/sounds/rain.mp3" type="audio/mpeg" />
+          <source src="/sounds/rainEdit2.mp3" type="audio/mpeg" />
           Your browser does not support the audio tag.
         </audio>
       </div>
