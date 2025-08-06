@@ -70,12 +70,22 @@ export default {
             opacity: "1",
           },
         },
+        pulse: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
+        pulsewave: {
+          "0%, 100%": { transform: "scale(1)", opacity: "0.7" },
+          "50%": { transform: "scale(1.25)", opacity: ".8" },
+        },
       },
       animation: {
         "float-up": "float-up .75s ease-out forwards",
         "float-up-cell": "float-up-cell 0.2s ease-out forwards",
         "fade-in": "fade-in .5s ease-out forwards",
         "fade-in-right": "fade-in-right .5s ease-out forwards",
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        pulsewave: "pulsewave 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       animationDelay: {
         "700": "700ms",
