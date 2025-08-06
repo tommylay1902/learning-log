@@ -38,7 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Nav />
-            <div className="flex flex-1">{children}</div>
+            <div className="flex-1">{children}</div>
           </ThemeProvider>
         </div>
       </body>

@@ -1,6 +1,5 @@
-import TimeLine from "@/components/timeline";
 import { Button } from "@/components/ui/button";
-
+import TimeLine from "./_components/timeline";
 import { Database } from "@/database.types";
 import { createClient } from "@/lib/supabase/client";
 import { createClient as createClientServer } from "@/lib/supabase/server";

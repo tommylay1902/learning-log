@@ -36,7 +36,7 @@ const Timer: React.FC<TimerProps> = ({ onTimerChange }) => {
         <TabsContent value="reflect">
           <div>hello</div>
         </TabsContent>
-        <TabsList className="fixed mb-4 animate-float-up bottom-4 justify-center">
+        <TabsList className="mb-4 animate-float-up bottom-4 justify-center items-center flex">
           <TabsTrigger value="work" className="text-6xl">
             Work
           </TabsTrigger>

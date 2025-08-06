@@ -1,6 +1,6 @@
-import { Card, CardContent } from "./ui/card";
-import { Separator } from "./ui/separator";
-import { Accordion, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import { Card, CardContent } from "../../../../components/ui/card";
+import { Separator } from "../../../../components/ui/separator";
+
 import { AccordionContent } from "@radix-ui/react-accordion";
 import { Database } from "@/database.types";
 import { DateTime } from "luxon";
@@ -13,6 +13,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface TimelineProps {
   entries: Record<
@@ -25,6 +30,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
     (await cookies()).get("user-timezone")?.value || "America/Los_Angeles";
 
   const totalDailyTimeSpent = convertTotalHoursDaily(entries);
+
   return (
     <div className="relative w-full animate-float-up opacity-0 delay-1000">
       <Separator
@@ -33,7 +39,7 @@ const TimeLine: React.FC<TimelineProps> = async ({ entries }) => {
       />
       {entries !== null &&
         Object.entries(entries).map(([date, logs], index) => (
-          <div key={index} className="relative mb-10 pl-8">
+          <div key={index} className="relative mb-10 pl-8 ">
             <div className="bg-foreground absolute left-0 top-3.5 flex size-4 items-center justify-center rounded-full " />
 
             <div className="flex items-between justify-between space-x-4 text-3xl font-bold mr-3 border-b-2 border-white pb-2">

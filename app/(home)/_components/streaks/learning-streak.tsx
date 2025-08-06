@@ -62,17 +62,20 @@ const LearningStreaks: React.FC<LearningStreaksProps> = ({
       </TableHeader>
       <TableBody>
         {weeks.map((week, weekIndex) => (
-          <TableRow key={weekIndex} className="hover:bg-transparent">
+          <TableRow
+            key={weekIndex}
+            className="hover:bg-transparent justify-center"
+          >
             {week.map((day) => (
               <Tooltip key={day}>
                 <TooltipTrigger asChild>
                   <TableCell
                     key={day}
-                    className={`w-6 h-6 opacity-0 rounded-sm hover:scale-110 animate-float-up-cell ${getColorClass(dailyHours[day])}`}
+                    className={`w-6 h-6 hover:scale-110 opacity-0 rounded-full animate-float-up-cell cursor-pointer ${getColorClass(dailyHours[day])}`}
                     style={{
                       animationDelay: `${(weekIndex * 7 + day) * 0.003}s`,
                     }}
-                  />
+                  ></TableCell>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>

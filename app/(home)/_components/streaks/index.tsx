@@ -34,7 +34,9 @@ const Streaks = async () => {
   const daysThisMonth = daysInThisMonth();
 
   return (
-    <div>
+    <div className="flex flex-row gap-x-4">
+      <LearningStreaks dailyHours={dailyHours} daysThisMonth={daysThisMonth} />
+      <LearningStreaks dailyHours={dailyHours} daysThisMonth={daysThisMonth} />
       <LearningStreaks dailyHours={dailyHours} daysThisMonth={daysThisMonth} />
     </div>
   );
