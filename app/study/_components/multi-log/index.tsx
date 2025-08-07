@@ -7,13 +7,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
 
 interface MultiLogProps {
   totalSteps: number;
@@ -53,20 +63,47 @@ const MultiLog = ({ totalSteps }: MultiLogProps) => {
   const renderFormFields = () => (
     <>
       <FormField
-        control={control}
         name="sessionEnded"
+        control={control}
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="flex flex-col">
             <FormLabel>Session Ended</FormLabel>
-            <FormControl>
-              {/*TODO: IMPL date and time picker*/}
-              <Input
-                {...field}
-                placeholder="Enter time date and time of session ending"
-                autoComplete="off"
-                className="!border-0 !border-b !border-b-white focus-visible:ring-0 focus-visible:ring-offset-0 text-center"
-              />
-            </FormControl>
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      " pl-3 text-left font-normal bg-transparent border-b-white",
+                      !field.value && "text-muted-foreground",
+                    )}
+                  >
+                    {field.value ? (
+                      format(field.value, "PPP")
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+              <PopoverContent className="w-[25vw] p-0">
+                <Calendar
+                  mode="single"
+                  selected={new Date(field.value)}
+                  onSelect={field.onChange}
+                  disabled={(date) =>
+                    date > new Date() || date < new Date("1900-01-01")
+                  }
+                  captionLayout="dropdown"
+                  className="w-full"
+                />
+              </PopoverContent>
+            </Popover>
+            <FormDescription>
+              Your date of birth is used to calculate your age.
+            </FormDescription>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -81,7 +118,7 @@ const MultiLog = ({ totalSteps }: MultiLogProps) => {
                 {...field}
                 placeholder="Title"
                 autoComplete="off"
-                className="!border-0 !border-b !border-b-white focus-visible:ring-0 focus-visible:ring-offset-0 text-center"
+                className="!border-0 !border-b !border-b-white focus-visible:ring-0 focus-visible:ring-offset-0 text-center hover:bg-accent"
               />
             </FormControl>
           </FormItem>
@@ -99,7 +136,7 @@ const MultiLog = ({ totalSteps }: MultiLogProps) => {
                 {...field}
                 placeholder="Build out some forms in shadcn..."
                 autoComplete="off"
-                className="bg-transparent border-white"
+                className=" border-white hover:bg-accent"
               />
             </FormControl>
           </FormItem>
