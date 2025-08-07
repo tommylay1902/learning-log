@@ -72,9 +72,7 @@ const renderFormFields = (control: Control<FieldValues>) => (
               />
             </PopoverContent>
           </Popover>
-          <FormDescription>
-            Your date of birth is used to calculate your age.
-          </FormDescription>
+          <FormDescription></FormDescription>
           <FormMessage />
         </FormItem>
       )}

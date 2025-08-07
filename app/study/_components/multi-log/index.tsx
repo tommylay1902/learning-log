@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,6 +23,7 @@ import {
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import { Label } from "@/components/ui/label";
 
 interface MultiLogProps {
   totalSteps: number;
@@ -67,42 +67,68 @@ const MultiLog = ({ totalSteps }: MultiLogProps) => {
         control={control}
         render={({ field }) => (
           <FormItem className="flex flex-col">
-            <FormLabel>Session Ended</FormLabel>
-            <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      " pl-3 text-left font-normal bg-transparent border-b-white",
-                      !field.value && "text-muted-foreground",
-                    )}
-                  >
-                    {field.value ? (
-                      format(field.value, "PPP")
-                    ) : (
-                      <span>Pick a date</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
-              <PopoverContent className="w-[25vw] p-0">
-                <Calendar
-                  mode="single"
-                  selected={new Date(field.value)}
-                  onSelect={field.onChange}
-                  disabled={(date) =>
-                    date > new Date() || date < new Date("1900-01-01")
-                  }
-                  captionLayout="dropdown"
-                  className="w-full"
+            <div>
+              <FormLabel>Session Ended</FormLabel>
+            </div>
+
+            <div className="flex flex-row items-center justify-center justify-items-center gap-x-3">
+              <div className="flex-1">
+                {/*calendar component*/}
+                <Label htmlFor="date-picker" className="px-1 block">
+                  Date
+                </Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "pl-3 text-left font-normal bg-transparent border-b-white w-full",
+                          !field.value && "text-muted-foreground",
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="p-0 bg-slate-800">
+                    <Calendar
+                      id="date-picker"
+                      mode="single"
+                      selected={new Date(field.value)}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      captionLayout="dropdown"
+                      className=" rounded-lg w-full"
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+
+              <div className="flex-1">
+                {/*time picker*/}
+                <Label htmlFor="time-picker" className="px-1 block">
+                  Time
+                </Label>
+                <Input
+                  type="time"
+                  id="time-picker"
+                  step="1"
+                  placeholder="10:30:00"
+                  className="w-full bg-inherit appearance-none focus-visible:ring-0 focus-visible:ring-offset-0
+                  [&::-webkit-calendar-picker-indicator]:hidden
+                  [&::-webkit-calendar-picker-indicator]:appearance-none border-b-white"
                 />
-              </PopoverContent>
-            </Popover>
-            <FormDescription>
-              Your date of birth is used to calculate your age.
-            </FormDescription>
+                {/*TODO implement a now button that adds button with current time*/}
+              </div>
+            </div>
             <FormMessage />
           </FormItem>
         )}

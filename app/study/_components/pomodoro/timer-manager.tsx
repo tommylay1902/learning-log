@@ -24,9 +24,12 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
   const [displayAlertBadge, setDisplayAlertBadge] = useState(false);
 
   useEffect(() => {
-    setDisplayAlertBadge(
-      cookies.get("pomosCompleted") ? true : false && !isActive,
-    );
+    const pomosCompleted = cookies.get("pomosCompleted");
+    if (pomosCompleted) {
+      setDisplayAlertBadge(
+        parseInt(pomosCompleted) > 0 ? true : false && !isActive,
+      );
+    }
   }, [cookies, isActive]);
 
   const handleOnComplete = () => {
