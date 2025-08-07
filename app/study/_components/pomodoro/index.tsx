@@ -43,13 +43,13 @@ const Pomodoro = () => {
   };
 
   return (
-    <div className="flex flex-1 overflow-x-hidden">
+    <div className="flex overflow-x-hidden h-full">
       {/*need to fix my layout this seems so hacky*/}
       <div
         className={`fixed inset-0 -z-10 tranisition-all duration-1000
           ${isWorking && isActive ? "bg-black" : "bg-transparent"}`}
       />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center h-full">
         <TimerManager onTimerChange={handleTimerChange} />
         <ToggleWarningsSwitch visible={!isActive} />
       </div>

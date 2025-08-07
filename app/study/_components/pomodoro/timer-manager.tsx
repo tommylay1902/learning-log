@@ -4,6 +4,12 @@ import BreakTimer from "./break-timer";
 import WorkTimer from "./work-timer";
 import { useState, useEffect } from "react";
 import { useCookies } from "next-client-cookies";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import Reflect from "./reflect";
 
 interface TimerManagerProps {
   onTimerChange: (isWorking: boolean, isActive: boolean) => void;
@@ -71,6 +77,7 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
       value={activeTab}
       onValueChange={(value) => handleTabChange(value as typeof activeTab)}
       activationMode="manual"
+      className="h-full"
     >
       <TabsContent value="work">
         <WorkTimer
@@ -82,8 +89,8 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
       <TabsContent value="break">
         <BreakTimer initialTime={600} onComplete={handleOnComplete} />
       </TabsContent>
-      <TabsContent value="reflect">
-        <div>hello</div>
+      <TabsContent value="reflect" className="flex-1">
+        <Reflect />
       </TabsContent>
 
       <TabsList
@@ -102,11 +109,18 @@ const TimerManager: React.FC<TimerManagerProps> = ({ onTimerChange }) => {
         <TabsTrigger value="reflect" className="text-6xl relative">
           Reflect
           {displayAlertBadge && (
-            <span
-              className="absolute top-0 right-0 ml-2 flex h-5 w-5
-            items-center justify-center rounded-full
-            bg-yellow-500 text-xs text-white opacity-0 animate-fade-in delay-1200"
-            />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span
+                  className="absolute top-0 right-0 ml-2 flex h-5 w-5
+                items-center justify-center rounded-full
+                bg-yellow-500 text-xs text-white opacity-0 animate-fade-in delay-1200"
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>You have some sessions you need to log</p>
+              </TooltipContent>
+            </Tooltip>
           )}
         </TabsTrigger>
       </TabsList>

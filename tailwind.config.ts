@@ -78,6 +78,9 @@ export default {
           "0%, 100%": { transform: "scale(1)", opacity: "0.7" },
           "50%": { transform: "scale(1.25)", opacity: ".8" },
         },
+        border: {
+          to: { "--border-angle": "360deg" },
+        },
       },
       animation: {
         "float-up": "float-up .75s ease-out forwards",
@@ -86,6 +89,7 @@ export default {
         "fade-in-right": "fade-in-right .5s ease-out forwards",
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         pulsewave: "pulsewave 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        border: "border 8s linear infinite",
       },
       animationDelay: {
         "700": "700ms",

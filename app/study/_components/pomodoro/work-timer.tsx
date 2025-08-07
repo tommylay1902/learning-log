@@ -88,7 +88,7 @@ const WorkTimer: React.FC<WorkTimerProps> = ({
   };
 
   return (
-    <div className="text-center text-8xl font-bold flex flex-col items-center justify-center justify-items-center gap-y-3 h-full pb-32">
+    <div className="text-center text-8xl font-bold flex flex-col items-center justify-center justify-items-center gap-y-3 h-full pb-32 min-h-[60vh]">
       <div>{isRunning ? "Focus" : "Stopped"}</div>
       <div>
         {Math.floor(time / 60).toFixed(0)}:{" "}

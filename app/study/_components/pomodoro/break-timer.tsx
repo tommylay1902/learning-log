@@ -39,7 +39,6 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ initialTime, onComplete }) => {
 
   useEffect(() => {
     if (time === 0) {
-      // will make sure it will fire after clearInterval in the event loop
       const timer = setTimeout(() => {
         setTime(initialTime);
         alert("done!");
@@ -65,7 +64,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ initialTime, onComplete }) => {
   }, []);
 
   return (
-    <div className="text-center text-8xl font-bold flex flex-col items-center justify-center justify-items-center gap-y-3 h-full pb-32">
+    <div className="text-center text-8xl font-bold flex flex-col items-center justify-center justify-items-center gap-y-3 h-full pb-32 min-h-[60vh]">
       <div>{isRunning ? "Relax" : "Stopped"}</div>
       <div>
         {Math.floor(time / 60).toFixed(0)}:{" "}
