@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button";
 import TimeLine from "./_components/timeline";
 import { Database } from "@/database.types";
 import { createClient } from "@/lib/supabase/client";
-import { createClient as createClientServer } from "@/lib/supabase/server";
+
 import { convertAndGroupLogs } from "@/lib/time/convert-and-group-logs";
 import { cookies } from "next/headers";
-import { Pencil } from "lucide-react";
 
 import React from "react";
 import { convertPomoToHours } from "@/lib/time/convert";
@@ -34,10 +32,6 @@ export default async function Page() {
     totalTime.total = convertPomoToHours(Object.values(convertedLogs));
   }
 
-  // create server client for auth/private related access
-  const supabaseServer = await createClientServer();
-  const { data, error } = await supabaseServer.auth.getClaims();
-
   return (
     <>
       <section className="flex-1">
@@ -53,14 +47,6 @@ export default async function Page() {
           <TimeLine entries={convertedLogs} />
         </div>
       </section>
-      {!error && data && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 animate-float-up">
-          <Button className="shadow-lg">
-            <Pencil />
-            Add Log
-          </Button>
-        </div>
-      )}
     </>
   );
 }

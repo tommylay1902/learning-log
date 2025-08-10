@@ -16,6 +16,7 @@ import {
 import { Info } from "lucide-react";
 import Image from "next/image";
 import { SquareArrowOutUpRight } from "lucide-react";
+import { getLastMonday } from "@/lib/time/date";
 
 interface LearningStatsProps {
   totalTimeSpent: number;
@@ -37,6 +38,17 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
     `,
     )
     .order("title");
+  console.log(getLastMonday().toISOString());
+  const { data: weeklyLogs, error: weeklyLogErrors } = await supabase
+    .from("learning_log")
+    .select()
+    .gte("created_at", getLastMonday().toISOString());
+
+  if (weeklyLogErrors) throw new Error();
+
+  const weeklyHours = weeklyLogs.reduce((acc, log) => {
+    return acc + (log.time_spent ? log.time_spent : 0);
+  }, 0);
 
   if (error) console.error(error);
   const filteredDate = data?.filter((d) => d.time_spent[0].sum > 0) ?? [];
@@ -99,7 +111,7 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
         </CardContent>
         <CardFooter className="flex-col gap-2 text-sm animate-float-up opacity-0 delay-700">
           <h1 className="flex gap-x-2">
-            Total Working Hours Logged: {totalTimeSpent.toFixed(2)}hrs{" "}
+            Total Working Hours Logged: {totalTimeSpent.toFixed(2)}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Info size={16} />
@@ -117,6 +129,9 @@ const LearningStats: React.FC<LearningStatsProps> = async ({
                 </p>
               </TooltipContent>
             </Tooltip>
+          </h1>
+          <h1>
+            Total hours spent this week: {((weeklyHours * 50) / 60).toFixed(2)}
           </h1>
         </CardFooter>
       </Card>
