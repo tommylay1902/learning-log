@@ -24,6 +24,7 @@ import z from "zod";
 interface RenderFormFieldsProps {
   control: Control<z.infer<typeof logSchema>>;
 }
+
 const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
   <>
     <div className="flex flex-row items-center justify-center gap-x-3">
@@ -75,8 +76,9 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
                 />
               </PopoverContent>
             </Popover>
-
-            <FormMessage />
+            <div className="min-h-[4vh]">
+              <FormMessage className="text-red-600" />
+            </div>
           </FormItem>
         )}
       />
@@ -86,7 +88,10 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
         render={({ field }) => (
           <FormItem className="flex-1">
             {/*time picker*/}
-            <FormLabel htmlFor="time-picker" className="px-1 block">
+            <FormLabel
+              htmlFor="time-picker"
+              className="px-1 block data-[error=true]:text-red-600 "
+            >
               Time
             </FormLabel>
             <FormControl>
@@ -102,6 +107,9 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
                 onChange={field.onChange}
               />
             </FormControl>
+            <div className="min-h-[4vh]">
+              <FormMessage className="text-red-600" />
+            </div>
             {/*TODO implement a now button that adds button with current time*/}
           </FormItem>
         )}
@@ -112,7 +120,9 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
       name="title"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Title</FormLabel>
+          <FormLabel className="data-[error=true]:text-red-600">
+            Title
+          </FormLabel>
           <FormControl>
             <Input
               {...field}
@@ -121,6 +131,7 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
               className="!border-0 !border-b !border-b-white focus-visible:ring-0 focus-visible:ring-offset-0 text-center hover:bg-accent"
             />
           </FormControl>
+          <FormMessage className="text-red-600" />
         </FormItem>
       )}
     />
@@ -130,7 +141,9 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
       name="content"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Content</FormLabel>
+          <FormLabel className="data-[error=true]:text-red-600">
+            Content
+          </FormLabel>
           <FormControl>
             <Textarea
               {...field}
@@ -139,6 +152,7 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
               className=" border-white hover:bg-accent"
             />
           </FormControl>
+          <FormMessage className="text-red-600" />
         </FormItem>
       )}
     />

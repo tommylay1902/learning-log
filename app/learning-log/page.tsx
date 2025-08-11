@@ -1,11 +1,8 @@
 import TimeLine from "./_components/timeline";
 import { Database } from "@/database.types";
 import { createClient } from "@/lib/supabase/client";
-
 import { convertAndGroupLogs } from "@/lib/time/convert-and-group-logs";
 import { cookies } from "next/headers";
-
-import React from "react";
 import { convertPomoToHours } from "@/lib/time/convert";
 import LearningStats from "./_components/learning-stats";
 
