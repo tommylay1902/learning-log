@@ -6,7 +6,7 @@ const MainView = async () => {
   // const logs = await fetchLogs(supabase);
   return (
     <section className="flex-1">
-      <div className="py-2 ml-3 mx-8">
+      <div className="py-2 mx-8">
         <LearningStatsView />
         <TimeLineView />
       </div>

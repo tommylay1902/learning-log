@@ -56,6 +56,7 @@ const TimeLine: React.FC<TimelineProps> = ({
   }
 
   const totalDailyTimeSpent = convertTotalHoursDaily(entries);
+
   return (
     <>
       <div className="w-full flex justify-center">
@@ -69,7 +70,8 @@ const TimeLine: React.FC<TimelineProps> = ({
           Current weekly Total: {((weeklyHours * 50) / 60).toFixed(2)}hrs
         </div>
       </div>
-      <div className="relative w-full animate-float-up opacity-0 delay-1000">
+      {/*animate-float-up opacity-0 delay-1000*/}
+      <div className="relative w-full ">
         <Separator
           orientation="vertical"
           className="bg-white absolute left-2 top-4"

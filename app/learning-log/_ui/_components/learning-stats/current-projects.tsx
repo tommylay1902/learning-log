@@ -8,7 +8,8 @@ import React from "react";
 
 const CurrentProjects = () => {
   return (
-    <div className="min-w-[30vw] text-center animate-fade-in-right delay-700 opacity-0">
+    // animate-fade-in-right delay-700 opacity-0
+    <div className="min-w-[30vw] text-center ">
       <h1 className="font-bold text-2xl inline-flex items-baseline justify-center gap-x-2">
         Current Projects I&apos;m working on
       </h1>
