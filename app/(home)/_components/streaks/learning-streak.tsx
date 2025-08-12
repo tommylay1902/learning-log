@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { currentMonthName } from "@/lib/time/date";
-import { getColorClass } from "../../_helpers/color-class";
+import { getColorClass } from "../../_lib/color-class";
 import {
   Tooltip,
   TooltipContent,
