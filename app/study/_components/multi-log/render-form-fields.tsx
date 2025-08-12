@@ -147,7 +147,7 @@ const RenderFormFields = ({ control }: RenderFormFieldsProps) => (
           <FormControl>
             <Textarea
               {...field}
-              placeholder="Build out some forms in shadcn..."
+              placeholder="Describe what you learn or built out in your session"
               autoComplete="off"
               className=" border-white hover:bg-accent"
             />
