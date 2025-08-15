@@ -11,7 +11,7 @@ import {
 
 export const description = "A pie chart with a label list";
 
-interface LearningPieChartProps {
+interface PieChartBreakdownProps {
   data:
     | {
         title: string | null;
@@ -24,7 +24,7 @@ interface LearningPieChartProps {
   title?: string;
 }
 
-export function LearningPieChart({ data }: LearningPieChartProps) {
+export function PieChartBreakdown({ data }: PieChartBreakdownProps) {
   const chartConfig: {
     [key: string]: {
       label: string;
